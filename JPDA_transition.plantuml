@@ -1,0 +1,16 @@
+@startuml
+title JPDA State Transition Diagram
+
+[*] --> Initialize : Start
+Initialize --> Clustering : Measurements Received
+Clustering --> HypothesisGeneration : Form Clusters
+HypothesisGeneration --> ProbabilityCalculation : Generate Hypotheses
+ProbabilityCalculation --> BestReportSelection : Calculate Probabilities
+BestReportSelection --> TrackUpdate : Select Best Report
+TrackUpdate --> [*] : Update Tracks
+
+Clustering --> [*] : No Clusters Formed
+HypothesisGeneration --> [*] : No Hypotheses Generated
+ProbabilityCalculation --> [*] : No Valid Probabilities
+BestReportSelection --> [*] : No Best Report Selected
+@enduml
