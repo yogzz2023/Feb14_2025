@@ -1,0 +1,24 @@
+@startuml
+title Activity Diagram 
+
+start
+:Process Measurements;
+:Get Measurements;
+if (Is Correlating?) then (Yes)
+  :Form Groups;
+  if (Single or Multiple?) then (Single)
+    :Single Association;
+    :Filter;
+    :Predict;
+    :Send to Sensor;
+  else (Multiple)
+    :Multiple Association (JPDA/Munkres);
+    :Filter;
+    :Predict;
+    :Send to Sensor;
+  endif
+else (No)
+  :End Process;
+endif
+stop
+@enduml
