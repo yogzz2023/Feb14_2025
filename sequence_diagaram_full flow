@@ -1,0 +1,40 @@
+@startuml
+title Sequence Diagram 
+
+actor User
+participant "MeasurementProcessor" as Processor
+participant "Measurement" as Meas
+participant "Group" as Grp
+participant "Association" as Assoc
+participant "Filter" as Filt
+participant "Sensor" as Sens
+
+User -> Processor: Process Measurements
+Processor -> Meas: Get Measurements
+Meas --> Processor: Return Measurements
+Processor -> Processor: Is Correlating?
+alt Correlating
+    Processor -> Grp: Form Groups
+    Grp --> Processor: Return Groups
+    Processor -> Processor: Single or Multiple?
+    alt Single
+        Processor -> Assoc: Single Association
+        Assoc --> Processor: Return Associated Data
+        Processor -> Filt: Filter
+        Filt --> Processor: Return Filtered Data
+        Processor -> Filt: Predict
+        Filt --> Processor: Return Predicted Data
+        Processor -> Sens: Send to Sensor
+    else Multiple
+        Processor -> Assoc: Multiple Association (JPDA/Munkres)
+        Assoc --> Processor: Return Associated Data
+        Processor -> Filt: Filter
+        Filt --> Processor: Return Filtered Data
+        Processor -> Filt: Predict
+        Filt --> Processor: Return Predicted Data
+        Processor -> Sens: Send to Sensor
+    end
+else Not Correlating
+    Processor -> User: End Process
+end
+@enduml
