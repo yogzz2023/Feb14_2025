@@ -1,0 +1,21 @@
+@startuml
+title Track Initiation State Transition Diagram
+
+[*] --> Poss1 : Initial Measurement
+Poss1 --> Tentative1 : 1st Correlation
+Tentative1 --> Firm : 2nd Correlation (3-step)
+
+Poss1 --> Poss2 : 1st Correlation (5-step)
+Poss2 --> Tentative1 : 2nd Correlation
+Tentative1 --> Tentative2 : 3rd Correlation
+Tentative2 --> Firm : 4th Correlation (5-step)
+
+Poss1 --> Poss2 : 1st Correlation (7-step)
+Poss2 --> Poss3 : 2nd Correlation
+Poss3 --> Tentative1 : 3rd Correlation
+Tentative1 --> Tentative2 : 4th Correlation
+Tentative2 --> Tentative3 : 5th Correlation
+Tentative3 --> Firm : 6th Correlation (7-step)
+
+Firm --> [*] : Timeout or No Measurements
+@enduml
