@@ -1,0 +1,22 @@
+@startuml
+start
+:Read Measurements from CSV;
+:Initialize CVFilter;
+:Form Measurement Groups;
+:Process Each Measurement Group;
+if (Single Measurement?) then (Yes)
+  :Initialize Filter State;
+else (Multiple Measurements?)
+  :Perform JPDA/Munkres;
+  :Select Best Report;
+endif
+:Predict Step;
+:Update Step;
+:Update Tracks;
+if (More Groups?) then (Yes)
+  :Process Next Group;
+else (No)
+  :Return Tracks;
+endif
+stop
+@enduml
